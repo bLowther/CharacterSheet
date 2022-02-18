@@ -5,11 +5,11 @@ const router = express.Router();
 
 const data = {
     base: {
-        STR: 20,
-        DEX: 18,
-        CON: 20,
-        INT: 12,
-        WIS: 14,
+        STR: 15,
+        DEX: 14,
+        CON: 13,
+        INT: 8,
+        WIS: 10,
         CHA: 12
     },
 }

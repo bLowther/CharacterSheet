@@ -14,15 +14,19 @@ const image = {
 const score = {
   position: "absolute",
   top: "13%",
-  left: "27%",
+  left: "23%",
+  height: "5vw",
+  width: "4.4vw",
   fontSize: "4vw"
 }
 
 const attribute = {
     position: "absolute",
-    bottom: 0,
-    left: "35%",
-    fontSize: "1.5vw"
+    bottom: "4%",
+    left: "23%",
+    height: "1.4vw",
+    width: "4.4vw",
+    fontSize: "1.4vw"
 }
 
 function Shield({num, atr}) {
