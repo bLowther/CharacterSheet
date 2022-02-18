@@ -25,12 +25,12 @@ const attribute = {
     fontSize: "1.5vw"
 }
 
-function Shield() {
+function Shield({num, atr}) {
 
   return (
     <div style={image}>
-      <div style={score}>20</div>
-      <div style={attribute}>STR</div>
+      <div style={score}>{num}</div>
+      <div style={attribute}>{atr}</div>
     </div>
   );
 }
