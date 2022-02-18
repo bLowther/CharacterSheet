@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Box, Grid } from '@mui/material';
 import axios from 'axios';
 import Stats from './Stats';
 
@@ -36,7 +37,13 @@ function App() {
   }, []);
 
   return (
-    <Stats abilities={stats.abilities} raceBonus={stats.raceBonus} asi={stats.asi}/>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid item>
+          <Stats stats={stats} info={info} setInfo={setInfo}/>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

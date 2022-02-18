@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Popover, Typography } from '@mui/material';
 
 const image = {
@@ -23,7 +23,7 @@ const score = {
 
 const attribute = {
     position: "absolute",
-    bottom: "4%",
+    bottom: "5%",
     left: "23%",
     height: "1.4vw",
     width: "4.4vw",
@@ -46,7 +46,7 @@ function Shield({ab, rb, asi, atr}) {
   return (
     <div style={image}>
       <Typography
-        style={score}
+        sx={score}
         aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
@@ -74,7 +74,7 @@ function Shield({ab, rb, asi, atr}) {
       >
         <Typography sx={{ p: 1 }}>{`Base(${ab}) + Racial Bonus(${rb}) + ASI(${asi})`}</Typography>
       </Popover>
-      <div style={attribute}>{atr}</div>
+      <Typography sx={attribute}>{atr}</Typography>
     </div>
   );
 }
