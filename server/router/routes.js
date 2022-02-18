@@ -1,9 +1,9 @@
 const express = require('express');
-const stats = require('./routes/stats.js');
+const character = require('./routes/character.js');
 
 
 const router = express.Router();
 
-router.use('/stats', stats);
+router.use('/character', character);
 
 module.exports = router;

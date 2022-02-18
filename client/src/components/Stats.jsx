@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Grid } from '@mui/material';
-import axios from 'axios';
+import React from 'react';
+import { Box } from '@mui/material';
 import Bar from '../parts/statBar';
 
-function Stats() {
-  const [base, setBase] = useState({});
-
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/stats')
-    .then(res => {
-      setBase(res.data.base)
-    })
-    .catch(err => console.log(err))
-  }, []);
+function Stats({abilities, raceBonus, asi}) {
 
   return (
     <Box >
-      <Bar stats={base}/>
+      <Bar abilities={abilities} raceBonus={raceBonus} asi={asi}/>
     </Box>
   );
 }

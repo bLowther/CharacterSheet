@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Popover, Typography } from '@mui/material';
 
 const image = {
   backgroundImage: `url("./statShield.webp")`,
@@ -13,8 +14,8 @@ const image = {
 
 const score = {
   position: "absolute",
-  top: "13%",
-  left: "23%",
+  top: "7%",
+  left: "22%",
   height: "5vw",
   width: "4.4vw",
   fontSize: "4vw"
@@ -29,11 +30,50 @@ const attribute = {
     fontSize: "1.4vw"
 }
 
-function Shield({num, atr}) {
+function Shield({ab, rb, asi, atr}) {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
 
   return (
     <div style={image}>
-      <div style={score}>{num}</div>
+      <Typography
+        style={score}
+        aria-owns={open ? 'mouse-over-popover' : undefined}
+        aria-haspopup="true"
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+      >
+        {ab + rb + asi}
+      </Typography>
+      <Popover
+        id="mouse-over-popover"
+        sx={{
+          pointerEvents: 'none',
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Typography sx={{ p: 1 }}>{`Base(${ab}) + Racial Bonus(${rb}) + ASI(${asi})`}</Typography>
+      </Popover>
       <div style={attribute}>{atr}</div>
     </div>
   );
