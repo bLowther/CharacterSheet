@@ -7,14 +7,20 @@ import Health from './health';
 const inputStyle = {
   fontSize: 12,
   padding: 0,
-  width: "6ch",
-  left: "6%"
+  width: "2vw",
+  left: "7%"
 };
+
+const tempStyle = {
+  borderStyle: "groove",
+  borderWidth: 2,
+  borderColor: "#1976d2"
+}
 
 const inProp = {
   type: "number",
   min: 0,
-  maxLength: 3
+  max: 300
 }
 
 // {name: '', image: '', background: '', race: '', currentHP: 1, maxHP: 1, tempHP: 0,}
@@ -65,38 +71,40 @@ const Profile = ({info, setInfo}) => {
   }
 
   return (
-    <Box sx={{ padding: 0 }}>
-      <Grid container direction="column" >
-        <Grid item>{info.name}</Grid>
-        <Grid item>{info.race} {info.background}</Grid>
-        <Grid item>
-          Temp: <Input sx={inputStyle} inputProps={inProp} value={shield} onChange={e => {setInput(0); setShield(e.target.value)}}/>
-        </Grid>
+    <Box >
+      <Grid container direction="column">
+        <Grid item style={{textAlign: "center", fontSize: "1.2vw"}}>{info.race} {info.background}</Grid>                 
         <Grid item>
           <Grid container>
-           <Grid item><Health color={color} health={health} temp={temp} image={info.image}/></Grid>
-          
+          <Grid item>
+              <Grid container direction="column">
+                <Grid item><Health color={color} health={health} temp={temp} image={info.image} /></Grid>
+                <Grid item style={{textAlign: "center", fontSize: ".8vw"}}>{info.currentHP} / {info.maxHP} ({info.tempHP})</Grid>
+              </Grid> 
+            </Grid>
             <Grid item>
               <Grid container direction="column">
-                <Grid item>
-                  <IconButton aria-label="damage" color="error" size="small" style={{ padding: 0 }} onClick={() => damage()}>
-                    <RemoveCircleIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <Input sx={inputStyle} inputProps={inProp} value={input} onChange={e => {setShield(0); setInput(e.target.value)}}/>
+                <Grid>Temp</Grid>
+                <Grid item sx={tempStyle}>
+                  <Input sx={inputStyle} inputProps={inProp} value={shield} onChange={e => {setInput(0); setShield(e.target.value)}}/>
                 </Grid>
                 <Grid item>
                   <IconButton aria-label="heal" color="success" size="small" style={{ padding: 0 }} onClick={() => heal()}>
                     <AddCircleIcon />
                   </IconButton>
                 </Grid>
+                <Grid item>
+                  <Input sx={inputStyle} inputProps={inProp} value={input} onChange={e => {setShield(0); setInput(e.target.value)}}/>
+                </Grid>                
+                <Grid item>
+                  <IconButton aria-label="damage" color="error" size="small" style={{ padding: 0 }} onClick={() => damage()}>
+                    <RemoveCircleIcon />
+                  </IconButton>
+                </Grid>                
               </Grid>
             </Grid>
           </Grid>
-
-        </Grid>
-        <Grid item>{info.currentHP} / {info.maxHP} ({info.tempHP})</Grid>   
+        </Grid>         
       </Grid>
     </Box>
   );

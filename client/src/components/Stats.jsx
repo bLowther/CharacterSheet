@@ -9,7 +9,7 @@ function Stats({stats, info, setInfo}) {
     <Box >
       <Grid container direction="row">
         <Grid item><Profile info={info} setInfo={setInfo}/></Grid>
-        <Grid item><Bar abilities={stats.abilities} raceBonus={stats.raceBonus} asi={stats.asi}/></Grid>
+        <Grid item><Bar abilities={stats.abilities} raceBonus={stats.raceBonus} asi={stats.asi} name={info.name}/></Grid>
       </Grid> 
     </Box>
   );

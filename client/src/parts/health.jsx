@@ -1,6 +1,8 @@
 import React from 'react';
 import { CircularProgress } from '@mui/material';
 
+const circleSize = "8vw"
+
 const circleStyle = {
   padding: 0,
   top: 0,
@@ -9,8 +11,8 @@ const circleStyle = {
 };
 
 const imgStyle = {
-  width: "7.8vw",
-  height: "7.8vw",
+  width: circleSize,
+  height: circleSize,
   borderRadius: "50%",
   justifyContent: "center",
   padding: 0
@@ -18,11 +20,11 @@ const imgStyle = {
 
 const divStyle = {
   position: "relative",
-  height: '8vw',
-  width: '8vw'
+  height: circleSize,
+  width: circleSize
 }
 
-function Health({color, health, temp, image}) {
+function Health({color, health, temp, image }) {
 
   return (
     <div style={divStyle}>
@@ -31,14 +33,14 @@ function Health({color, health, temp, image}) {
         sx={circleStyle}
         thickness={3}
         color={color}
-        size={"7.8vw"}
+        size={circleSize}
         variant="determinate"
         value={health}
       />
       <CircularProgress
         sx={circleStyle}
         thickness={3}
-        size={"7.8vw"}
+        size={circleSize}
         variant="determinate"
         value={temp}
       />

@@ -33,6 +33,10 @@ const attribute = {
 function Shield({ab, rb, asi, atr}) {
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const base = ab ? ab : 0;
+  const race = rb ? rb : 0;
+  const bonus = asi ? asi : 0;
+
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -52,7 +56,7 @@ function Shield({ab, rb, asi, atr}) {
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
       >
-        {ab + rb + asi}
+        {base + race + bonus}
       </Typography>
       <Popover
         id="mouse-over-popover"
@@ -72,7 +76,7 @@ function Shield({ab, rb, asi, atr}) {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>{`Base(${ab}) + Racial Bonus(${rb}) + ASI(${asi})`}</Typography>
+        <Typography sx={{ p: 1 }}>{`Base(${base}) + Racial Bonus(${race}) + ASI(${bonus})`}</Typography>
       </Popover>
       <Typography sx={attribute}>{atr}</Typography>
     </div>
