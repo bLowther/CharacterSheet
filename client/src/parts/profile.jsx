@@ -34,6 +34,7 @@ const Profile = ({info, setInfo}) => {
   useEffect(() => {
     setTemp(Math.ceil(((info.tempHP * 100) / info.maxHP)));
     setHealth(Math.ceil(((info.currentHP * 100) / info.maxHP)));
+    setShield(info.tempHP);
   },[info]);
 
   useEffect(() => {
@@ -43,31 +44,25 @@ const Profile = ({info, setInfo}) => {
   },[health]);
 
   const damage = () => {
-    if(shield > 0) {
-      info.tempHP = Math.max(0, (info.tempHP - Number(shield)));
-    }else if(health > 0) {
-      let hurt = Number(input) || 1;
-      let extra = info.tempHP - hurt;
-      info.tempHP = Math.max(0, extra);
-      if (extra < 0) {
-        info.currentHP = Math.max(0, (info.currentHP + extra));
-      }
+    let hurt = Number(input) || 1;
+    let extra = shield - hurt;
+    if(extra < 0) {
+      info.currentHP = Math.max(0, (info.currentHP + extra));
+      info.tempHP = 0; 
+    } else {
+      info.tempHP = extra; 
     }
     setInfo({...info});
     setInput(0);
-    setShield(0);
   }
 
-  const heal = () => {
-    if(shield > 0) {
-      info.tempHP = info.tempHP + Number(shield);
-    }else if(info.currentHP < info.maxHP) {
+  const heal = () => {   
+    if(info.currentHP < info.maxHP) {
       const healing = Number(input) || 1;
       info.currentHP = Math.min(info.maxHP, (info.currentHP + healing));
-    }
-    setInfo({...info});
-    setInput(0);
-    setShield(0);
+      setInfo({...info});
+      setInput(0);
+    } 
   }
 
   return (
@@ -79,14 +74,19 @@ const Profile = ({info, setInfo}) => {
           <Grid item>
               <Grid container direction="column">
                 <Grid item><Health color={color} health={health} temp={temp} image={info.image} /></Grid>
-                <Grid item style={{textAlign: "center", fontSize: ".8vw"}}>{info.currentHP} / {info.maxHP} ({info.tempHP})</Grid>
+                <Grid item style={{textAlign: "center", fontSize: ".8vw"}}>{info.currentHP} / {info.maxHP}</Grid>
               </Grid> 
             </Grid>
             <Grid item>
               <Grid container direction="column">
                 <Grid>Temp</Grid>
                 <Grid item sx={tempStyle}>
-                  <Input sx={inputStyle} inputProps={inProp} value={shield} onChange={e => {setInput(0); setShield(e.target.value)}}/>
+                  <Input
+                    sx={inputStyle}
+                    inputProps={inProp}
+                    value={shield} 
+                    onChange={e => {setShield(e.target.value); info.tempHP = e.target.value; setInfo({...info});}}
+                  />
                 </Grid>
                 <Grid item>
                   <IconButton aria-label="heal" color="success" size="small" style={{ padding: 0 }} onClick={() => heal()}>
@@ -94,7 +94,7 @@ const Profile = ({info, setInfo}) => {
                   </IconButton>
                 </Grid>
                 <Grid item>
-                  <Input sx={inputStyle} inputProps={inProp} value={input} onChange={e => {setShield(0); setInput(e.target.value)}}/>
+                  <Input sx={inputStyle} inputProps={inProp} value={input} onChange={e => {setInput(e.target.value)}}/>
                 </Grid>                
                 <Grid item>
                   <IconButton aria-label="damage" color="error" size="small" style={{ padding: 0 }} onClick={() => damage()}>

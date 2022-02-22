@@ -19,7 +19,7 @@ const mock = {
       raceBonus: {STR: 1, DEX: 1, CON: 1, INT: 1, WIS: 1, CHA: 1},
       playerClass: {'warlock': {level: 1, subclass: null}},
       abilities: {STR: 8, DEX: 10, CON: 12, INT: 13, WIS: 14, CHA: 15},
-      asi: {STR: 0, DEX: 0, CON: 0, INT: 0, WIS: 0, CHA: 0},
+      asi: {},
       feats: [],
       skills: {
         Acrobatics: 0,
