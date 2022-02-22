@@ -12,22 +12,34 @@ const image = {
   width: '8vw'
 }
 
-const score = {
+const socreSize = "3.8vw";
+const scoreStyle = {
   position: "absolute",
-  top: "7%",
-  left: "22%",
-  height: "5vw",
-  width: "4.4vw",
-  fontSize: "4vw"
+  top: "30%",
+  width: "8vw",
+  height: socreSize,
+  lineHeight: socreSize,
+  fontSize: socreSize
 }
 
+const bonusSize = "1.5vw"
+const bonusStyle = {
+  position: "absolute",
+  top: "10%",
+  width: "8vw",
+  height: bonusSize,
+  lineHeight: bonusSize,
+  fontSize: bonusSize
+}
+
+const attSize = "1.2vw"
 const attribute = {
     position: "absolute",
-    bottom: "5%",
-    left: "23%",
-    height: "1.4vw",
-    width: "4.4vw",
-    fontSize: "1.4vw"
+    bottom: "3%",
+    width: "8vw",
+    height: attSize,
+    lineHeight: attSize,
+    fontSize: attSize
 }
 
 function Shield({ab, rb, asi, atr}) {
@@ -36,6 +48,7 @@ function Shield({ab, rb, asi, atr}) {
   const base = ab ? ab : 0;
   const race = rb ? rb : 0;
   const bonus = asi ? asi : 0;
+  const score = base + race + bonus;
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -49,14 +62,15 @@ function Shield({ab, rb, asi, atr}) {
 
   return (
     <div style={image}>
+      <Typography sx={bonusStyle}>{Math.floor((score-10)/2)}</Typography>
       <Typography
-        sx={score}
+        sx={scoreStyle}
         aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
       >
-        {base + race + bonus}
+        {score}
       </Typography>
       <Popover
         id="mouse-over-popover"
