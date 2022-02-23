@@ -15,11 +15,11 @@ function App() {
   });
   const [stats, setStats] = useState({
     raceBonus: {},
-    playerClass: {},
+    classes: [],
     abilities: {},
     asi: {},
     feats: [],
-    bonus: {},
+    bonuses: {},
     skills: {},
     profs: {}
   });

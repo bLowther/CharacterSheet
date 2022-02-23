@@ -80,7 +80,7 @@ function Shield({ab, rb, asi, atr, bonus}) {
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'bottom',
+          vertical: 'top',
           horizontal: 'left',
         }}
         transformOrigin={{

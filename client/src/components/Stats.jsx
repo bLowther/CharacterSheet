@@ -10,8 +10,8 @@ function Stats({stats, info, setInfo}) {
     <Box >
       <Grid container direction="row">
         <Grid item><Profile info={info} setInfo={setInfo}/></Grid>
-        <Grid item><Bar abilities={stats.abilities} raceBonus={stats.raceBonus} asi={stats.asi} bonus={stats.bonus} name={info.name}/></Grid>
-        <Grid item><Skills stats={stats}/></Grid>
+        <Grid item><Bar abilities={stats.abilities} raceBonus={stats.raceBonus} asi={stats.asi} bonus={stats.bonuses} name={info.name}/></Grid>
+        <Grid item><Skills classes={stats.classes} bonuses={stats.bonuses} skills={stats.skills}/></Grid>
       </Grid> 
     </Box>
   );
