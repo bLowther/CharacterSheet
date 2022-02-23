@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, IconButton, Input } from '@mui/material';
+import { Box, Grid, IconButton, InputBase } from '@mui/material';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Health from './health';
@@ -12,16 +12,22 @@ const inputStyle = {
 };
 
 const tempStyle = {
+  height: "2.1vw",
+  width: "2.3vw",
   borderStyle: "groove",
   borderWidth: 2,
   borderColor: "#1976d2"
-}
+};
+
+const iconStyle = {
+  fontSize: "1.5vw"
+};
 
 const inProp = {
   type: "number",
   min: 0,
   max: 300
-}
+};
 
 // {name: '', image: '', background: '', race: '', currentHP: 1, maxHP: 1, tempHP: 0,}
 const Profile = ({info, setInfo}) => {
@@ -79,9 +85,9 @@ const Profile = ({info, setInfo}) => {
             </Grid>
             <Grid item>
               <Grid container direction="column">
-                <Grid>Temp</Grid>
+                <Grid item sx={{fontSize: ".8vw"}}>Temp</Grid>
                 <Grid item sx={tempStyle}>
-                  <Input
+                  <InputBase
                     sx={inputStyle}
                     inputProps={inProp}
                     value={shield} 
@@ -90,15 +96,15 @@ const Profile = ({info, setInfo}) => {
                 </Grid>
                 <Grid item>
                   <IconButton aria-label="heal" color="success" size="small" style={{ padding: 0 }} onClick={() => heal()}>
-                    <AddCircleIcon />
+                    <AddCircleIcon sx={iconStyle}/>
                   </IconButton>
                 </Grid>
                 <Grid item>
-                  <Input sx={inputStyle} inputProps={inProp} value={input} onChange={e => {setInput(e.target.value)}}/>
+                  <InputBase sx={inputStyle} inputProps={inProp} value={input} onChange={e => {setInput(e.target.value)}}/>
                 </Grid>                
                 <Grid item>
                   <IconButton aria-label="damage" color="error" size="small" style={{ padding: 0 }} onClick={() => damage()}>
-                    <RemoveCircleIcon />
+                    <RemoveCircleIcon sx={iconStyle}/>
                   </IconButton>
                 </Grid>                
               </Grid>

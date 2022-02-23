@@ -42,13 +42,13 @@ const attribute = {
     fontSize: attSize
 }
 
-function Shield({ab, rb, asi, atr}) {
+function Shield({ab, rb, asi, atr, bonus}) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const base = ab ? ab : 0;
   const race = rb ? rb : 0;
-  const bonus = asi ? asi : 0;
-  const score = base + race + bonus;
+  const ASI = asi ? asi : 0;
+  const score = base + race + ASI;
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -62,7 +62,7 @@ function Shield({ab, rb, asi, atr}) {
 
   return (
     <div style={image}>
-      <Typography sx={bonusStyle}>{Math.floor((score-10)/2)}</Typography>
+      <Typography sx={bonusStyle}>{bonus}</Typography>
       <Typography
         sx={scoreStyle}
         aria-owns={open ? 'mouse-over-popover' : undefined}
@@ -90,7 +90,11 @@ function Shield({ab, rb, asi, atr}) {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>{`Base(${base}) + Racial Bonus(${race}) + ASI(${bonus})`}</Typography>
+        <Typography sx={{ p: 1 }}>
+          {(base > 0 ? `Base(${base}) ` : "") +
+          (race > 0 ? `+ Racial Bonus(${race}) ` : "") +
+          (ASI > 0 ? `+ ASI(${ASI})` : "")}
+        </Typography>
       </Popover>
       <Typography sx={attribute}>{atr}</Typography>
     </div>
