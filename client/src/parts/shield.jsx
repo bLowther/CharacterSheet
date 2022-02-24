@@ -98,7 +98,8 @@ function Shield({ab, rb, asi, atr, bonus, prof, pBonus}) {
           (ASI > 0 ? `+ ASI(${ASI})` : "")}
         </Typography>
       </Popover>
-      <Typography sx={attribute} onClick={()=>{console.log(save())}}>{atr}</Typography>
+      {prof ? <Typography sx={attribute} onClick={()=>{console.log(save())}}><b>{atr}</b></Typography>
+      : <Typography sx={attribute} onClick={()=>{console.log(save())}}>{atr}</Typography>}
     </div>
   );
 }

@@ -64,7 +64,10 @@ function Skills({pBonus, bonuses, skills }) {
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <InputLabel>Skill</InputLabel>
               <Select value={skill} onChange={handleSkill} input={<OutlinedInput label="Skill"/>}>
-               {Object.keys(skills).map(key => <MenuItem key={key} value={key}>{key}</MenuItem>)}
+               {Object.keys(skills).map(key => 
+                  skills[key].prof > 0 ? <MenuItem key={key} value={key}><b>{key}</b></MenuItem>
+                  : <MenuItem key={key} value={key}>{key}</MenuItem>
+                )}
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
