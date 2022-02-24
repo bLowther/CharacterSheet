@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Popover, Typography } from '@mui/material';
+import { d20 } from './dice';
 
 const image = {
   backgroundImage: `url("./statShield.webp")`,
@@ -42,13 +43,14 @@ const attribute = {
     fontSize: attSize
 }
 
-function Shield({ab, rb, asi, atr, bonus}) {
+function Shield({ab, rb, asi, atr, bonus, prof, pBonus}) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const base = ab ? ab : 0;
   const race = rb ? rb : 0;
   const ASI = asi ? asi : 0;
   const score = base + race + ASI;
+  const save = ()=>{const roll = d20(); return prof ? `${roll+bonus+pBonus}(${roll}+${bonus}+${pBonus})` : `${roll+bonus}(${roll}+${bonus})`}
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -96,7 +98,7 @@ function Shield({ab, rb, asi, atr, bonus}) {
           (ASI > 0 ? `+ ASI(${ASI})` : "")}
         </Typography>
       </Popover>
-      <Typography sx={attribute}>{atr}</Typography>
+      <Typography sx={attribute} onClick={()=>{console.log(save())}}>{atr}</Typography>
     </div>
   );
 }

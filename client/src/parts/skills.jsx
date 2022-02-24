@@ -1,20 +1,66 @@
 import React, { useState } from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, OutlinedInput, MenuItem, FormControl, Select } from '@mui/material';
+import { d20 } from './dice';
 
-function Skills({classes, bonuses, skills }) {
+function Skills({pBonus, bonuses, skills }) {
 
-  const [skill, setSkill] = useState(0);
-  const [bonus, setBonus] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [skill, setSkill] = useState('');
+  const [bonus, setBonus] = useState('');
+  const [modifier, setModifier] = useState(0);
 
-  const level = classes.reduce((previousValue, currentValue) => previousValue + currentValue.level, 0)
-  const pBonus = level > 16 ? 6 : level > 12 ? 5 : level > 8 ? 4 : level > 4 ? 3 : 2;
+  const handleSkill = e => {
+    const value = e.target.value;
+    const selectedSkill = skills[value];
+    setSkill(value);
+    setBonus(selectedSkill.standard);
+    setModifier(Math.floor(pBonus * selectedSkill.prof) + bonuses[selectedSkill.standard]);
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+      setOpen(false);
+      setBonus('');
+      setSkill('');
+  };
+
+  const handleRoll = () => {
+    const roll = d20();
+    const prof = skills[skill].prof;
+    console.log(`${skill} ${roll + modifier}(${roll}+${bonuses[bonus]}${prof > 0 ? `+${prof}` : ''})`);
+    handleClose();
+  }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container direction="column">
-        
-      </Grid>
-    </Box>
+    <div>
+      <Button onClick={handleClickOpen}>Make an Skill Check</Button>
+      <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
+        <DialogTitle sx={{textAlign: "center"}}>Choose an Skill</DialogTitle>
+        <DialogContent>
+          <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel>Skill</InputLabel>
+              <Select value={skill} onChange={handleSkill} input={<OutlinedInput label="Skill"/>}>
+               {Object.keys(skills).map(key => <MenuItem key={key} value={key}>{key}</MenuItem>)}
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel>Ability</InputLabel>
+              <Select value={bonus} onChange={e => setBonus(e.target.value)} input={<OutlinedInput label="Ability" />}>
+                {Object.keys(bonuses).map(key => <MenuItem key={key} value={key}>{key}</MenuItem>)}
+              </Select>
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleRoll}>Roll Check!</Button>
+          <Button onClick={handleClose}>Cancel</Button>          
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
 
