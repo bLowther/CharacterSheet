@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import {
   Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, OutlinedInput, MenuItem, FormControl, Select, ToggleButton  
 } from '@mui/material';
+import Brightness5Icon from '@mui/icons-material/Brightness5';
+import BrightnessHighIcon from '@mui/icons-material/BrightnessHigh';
+import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import { d20 } from './dice';
+
 
 function Skills({pBonus, bonuses, skills }) {
 
@@ -65,8 +70,10 @@ function Skills({pBonus, bonuses, skills }) {
               <InputLabel>Skill</InputLabel>
               <Select value={skill} onChange={handleSkill} input={<OutlinedInput label="Skill"/>}>
                {Object.keys(skills).map(key => 
-                  skills[key].prof > 0 ? <MenuItem key={key} value={key}><b>{key}</b></MenuItem>
-                  : <MenuItem key={key} value={key}>{key}</MenuItem>
+                  skills[key].prof === 0 ? <MenuItem key={key} value={key}><PanoramaFishEyeIcon fontSize="small"/>{key}</MenuItem>
+                  : skills[key].prof === .5 ? <MenuItem key={key} value={key}><ModeStandbyIcon fontSize="small"/>{key}</MenuItem>
+                  : skills[key].prof === 1 ? <MenuItem key={key} value={key}><Brightness5Icon fontSize="small"/>{key}</MenuItem>
+                  : <MenuItem key={key} value={key}><BrightnessHighIcon fontSize="small"/>{key}</MenuItem>
                 )}
               </Select>
             </FormControl>
