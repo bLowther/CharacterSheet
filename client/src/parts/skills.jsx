@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, OutlinedInput, MenuItem, FormControl, Select } from '@mui/material';
+import {
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, OutlinedInput, MenuItem, FormControl, Select, ToggleButton  
+} from '@mui/material';
 import { d20 } from './dice';
 
 function Skills({pBonus, bonuses, skills }) {
@@ -7,36 +9,54 @@ function Skills({pBonus, bonuses, skills }) {
   const [open, setOpen] = useState(false);
   const [skill, setSkill] = useState('');
   const [bonus, setBonus] = useState('');
-  const [modifier, setModifier] = useState(0);
+  const [advantage, setAdvantage] = useState(false);
+  const [disadvantage, setDisadvantage] = useState(false);
 
   const handleSkill = e => {
     const value = e.target.value;
     const selectedSkill = skills[value];
     setSkill(value);
     setBonus(selectedSkill.standard);
-    setModifier(Math.floor(pBonus * selectedSkill.prof) + bonuses[selectedSkill.standard]);
   }
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
+  const handleToggle = e => {
+    if(e.target.value === "advantage"){
+      setAdvantage(!advantage);
+      setDisadvantage(false);
+    } else {
+      setAdvantage(false);
+      setDisadvantage(!disadvantage);
+    }
+  }
+
   const handleClose = () => {
       setOpen(false);
+      setAdvantage(false);
+      setDisadvantage(false);
       setBonus('');
       setSkill('');
   };
 
   const handleRoll = () => {
-    const roll = d20();
+    const roll1 = d20();
+    const roll2 = d20();
     const prof = skills[skill].prof;
-    console.log(`${skill} ${roll + modifier}(${roll}+${bonuses[bonus]}${prof > 0 ? `+${prof}` : ''})`);
+    const statBonus = bonuses[bonus];
+    const modifier = Math.floor(pBonus * prof) + statBonus;
+
+    advantage ? console.log(`${skill} ${Math.max(roll1, roll2 ) + modifier}(${roll1}/${roll2} + ${statBonus}${prof > 0 ? ` + ${pBonus}` : ''})`) :
+    disadvantage ? console.log(`${skill} ${Math.min(roll1, roll2 )  + modifier}(${roll1}/${roll2} + ${statBonus}${prof > 0 ? ` + ${pBonus}` : ''})`) :
+    console.log(`${skill} ${roll1 + modifier}(${roll1}+${statBonus}${prof > 0 ? `+${pBonus}` : ''})`);
     handleClose();
   }
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>Make an Skill Check</Button>
+      <Button variant="contained" onClick={handleClickOpen}>Make an Skill Check</Button>
       <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
         <DialogTitle sx={{textAlign: "center"}}>Choose an Skill</DialogTitle>
         <DialogContent>
@@ -56,7 +76,13 @@ function Skills({pBonus, bonuses, skills }) {
           </Box>
         </DialogContent>
         <DialogActions>
+          <ToggleButton value="advantage" color="success" selected={advantage} onChange={handleToggle}>
+            Adv
+          </ToggleButton>
           <Button onClick={handleRoll}>Roll Check!</Button>
+          <ToggleButton value="disadvantage" color="error" selected={disadvantage} onChange={handleToggle}>
+            Dis
+          </ToggleButton>
           <Button onClick={handleClose}>Cancel</Button>          
         </DialogActions>
       </Dialog>
