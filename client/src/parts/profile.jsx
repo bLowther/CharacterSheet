@@ -5,7 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Health from './health';
 
 const inputStyle = {
-  fontSize: 12,
+  fontSize: "1vw",
   padding: 0,
   width: "2vw",
   left: "7%"
@@ -38,7 +38,7 @@ const Profile = ({info, setInfo}) => {
   const [shield, setShield] = useState(0);
 
   useEffect(() => {
-    setTemp(Math.ceil(((info.tempHP * 100) / info.maxHP)));
+    setTemp(Math.min(100, Math.ceil(((info.tempHP * 100) / info.maxHP))));
     setHealth(Math.ceil(((info.currentHP * 100) / info.maxHP)));
     setShield(info.tempHP);
   },[info]);
