@@ -21,7 +21,7 @@ const mock = {
       abilities: {STR: 8, DEX: 10, CON: 12, INT: 13, WIS: 14, CHA: 15},
       asi: {},
       feats: [],
-      bonuses: {STR: -1, DEX: 0, CON: 1, INT: 2, WIS: 2, CHA: 3},
+      bonuses: {STR: -1, DEX: 0, CON: 1, INT: 2, WIS: 2, CHA: 3}, // make sure to do this math server-side (Math.floor(raceBonus + abilities + asi - 10) / 2))
       skills: {
         Acrobatics: 0,
         Animal_Handling: 0,
@@ -44,14 +44,14 @@ const mock = {
       },
       profs: {
         saves: ['WIS', 'CHA'],
-        armor: ['Light Armor'],
-        weapons: ['Simple Weapons'],
+        armor: ['Light'],
+        weapons: ['Simple'],
         tools: [],
         languages: ['Common', 'Dwarvish', 'Elvish']
       }
     },
     equipment: {
-      equiped: [],
+      equiped: {armor: 'Leather Armor', hands:{1:'', 2:''}},
       bag: [],
     },
     spells: {

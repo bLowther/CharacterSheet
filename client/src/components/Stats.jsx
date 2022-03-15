@@ -4,7 +4,7 @@ import Profile from '../parts/profile';
 import Bar from '../parts/statBar';
 import Glance from '../parts/combatQuickGlance';
 
-function Stats({stats, info, setInfo, pBonus}) {
+function Stats({stats, info, setInfo, pBonus, armor, armorProf}) { // look up what happens when you aren't proficient with armor you wearing
 
   return (
     <Box >
@@ -22,11 +22,11 @@ function Stats({stats, info, setInfo, pBonus}) {
             raceBonus={stats.raceBonus}
             asi={stats.asi}
             bonus={stats.bonuses}
-            prof={stats.profs.saves}
+            saveProfs={stats.profs.saves}
             name={info.name}/>
         </Grid>
         <Grid item>
-          <Glance />
+          <Glance race={info.race} dex={stats.bonuses.DEX} armor={armor} armorProf={armorProf}/>
         </Grid>
       </Grid> 
     </Box>

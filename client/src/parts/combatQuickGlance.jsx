@@ -1,12 +1,11 @@
-// Move speeds, Initiative, AC, 
-import React, { useState } from 'react';
+import React from 'react';
 import { d20 } from './dice';
 
-function Glance({color, health, temp, image }) {
+function Glance({race, dex, armor, armorProf }) {
 
   return (
     <div >
-      Hello World
+      Move speeds {race}, Initiative {dex}, AC {armor}
     </div>
   );
 }

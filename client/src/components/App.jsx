@@ -24,8 +24,9 @@ function App() {
     skills: {},
     profs: {}
   });
-  const [equipment, setEquipment] = useState({equiped: [], bag: []});
+  const [equipment, setEquipment] = useState({equiped: {armor: '', hands:{}}, bag: []});
   const [spells, setSpells] = useState({slots: [], prepared: [], known: []});
+  const [armorProf, setArmorProf] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/character')
@@ -38,6 +39,15 @@ function App() {
     .catch(err => console.log(err))
   }, []);
 
+  useEffect(() => {
+    const armor = equipment.equiped.armor;
+    if(armor){axios.get(`http://localhost:3000/api/d&d/${armor}`)
+    .then(res => {
+      setArmorProf(stats.profs.armor.includes(res.data));
+    })
+    .catch(err => console.log(err))}
+  }, [equipment])
+
   const level = stats.classes.reduce((previousValue, currentValue) => previousValue + currentValue.level, 0)
   const pBonus = level > 16 ? 6 : level > 12 ? 5 : level > 8 ? 4 : level > 4 ? 3 : 2;
 
@@ -45,7 +55,7 @@ function App() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container direction="column" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item>
-          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus}/>
+          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armor={equipment.equiped.armor} armorProf={armorProf}/>
         </Grid>
         <Grid item>
           <Skills pBonus={pBonus} bonuses={stats.bonuses} skills={stats.skills}/>

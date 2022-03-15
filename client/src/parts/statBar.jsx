@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid } from '@mui/material';
 import Shield from './shield';
 
-function Bar({abilities, raceBonus, asi, name, bonus, prof, pBonus }) {
+function Bar({abilities, raceBonus, asi, name, bonus, saveProfs, pBonus }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -18,7 +18,7 @@ function Bar({abilities, raceBonus, asi, name, bonus, prof, pBonus }) {
                   asi={asi[key]}
                   atr={key}
                   bonus={bonus[key]}
-                  prof={prof.includes(key)}
+                  prof={saveProfs.includes(key)}
                   pBonus={pBonus}
                 />
               </Grid>
