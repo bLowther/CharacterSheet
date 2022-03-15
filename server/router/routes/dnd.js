@@ -5,7 +5,7 @@ const router = express.Router();
 
 const endpoint = 'https://www.dnd5eapi.co/graphql';
 
-router.get('/:armor', (req, res) => {
+router.get('/armorType/:armor', (req, res) => {
   const graphqlQuery = {
     "operationName": "Equipments",
     "query": `query Equipments($filter: FilterFindOneEquipmentInput) {

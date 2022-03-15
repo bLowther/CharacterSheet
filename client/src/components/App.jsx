@@ -41,7 +41,7 @@ function App() {
 
   useEffect(() => {
     const armor = equipment.equiped.armor;
-    if(armor){axios.get(`http://localhost:3000/api/d&d/${armor}`)
+    if(armor){axios.get(`http://localhost:3000/api/d&d/armorType/${armor}`)
     .then(res => {
       setArmorProf(stats.profs.armor.includes(res.data));
     })
