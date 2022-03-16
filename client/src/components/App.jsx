@@ -24,9 +24,16 @@ function App() {
     skills: {},
     profs: {}
   });
-  const [equipment, setEquipment] = useState({equiped: {armor: '', hands:{}}, bag: []});
+  const [equipment, setEquipment] = useState({equiped: {armor: null, hands:{}}, bag: []});
   const [spells, setSpells] = useState({slots: [], prepared: [], known: []});
   const [armorProf, setArmorProf] = useState(false);
+  const [disStealth, setdisStealth] = useState(false);
+  const [ac, setAc] = useState({
+    armor_category: '',
+    armor_class: {base:0, dex_bonus: true, max_bonus: null, },
+    stealth_disadvantage: false,
+    str_minimum: 0
+  });
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/character')
@@ -43,7 +50,9 @@ function App() {
     const armor = equipment.equiped.armor;
     if(armor){axios.get(`http://localhost:3000/api/d&d/armorType/${armor}`)
     .then(res => {
-      setArmorProf(stats.profs.armor.includes(res.data));
+      setArmorProf(stats.profs.armor.includes(res.data.armor_category));
+      setdisStealth(res.data.stealth_disadvantage);
+      setAc(res.data)
     })
     .catch(err => console.log(err))}
   }, [equipment])
@@ -55,10 +64,11 @@ function App() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container direction="column" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item>
-          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armor={equipment.equiped.armor} armorProf={armorProf}/>
+          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armorProf={armorProf} ac={ac}/>
         </Grid>
         <Grid item>
-          <Skills pBonus={pBonus} bonuses={stats.bonuses} skills={stats.skills}/>
+          <Skills pBonus={pBonus} bonuses={stats.bonuses} skills={stats.skills} armorProf={armorProf} disStealth={disStealth}/>
+            {/* If you wear armor that you lack proficiency with you have disadvantage on any Attack roll that involves Strength or Dexterity and you can't cast Spells */}
         </Grid>
       </Grid>
     </Box>

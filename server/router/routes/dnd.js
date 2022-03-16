@@ -11,6 +11,13 @@ router.get('/armorType/:armor', (req, res) => {
     "query": `query Equipments($filter: FilterFindOneEquipmentInput) {
       equipment(filter: $filter) {
         armor_category
+        armor_class {
+          base
+          dex_bonus
+          max_bonus
+        }
+        stealth_disadvantage
+        str_minimum
       }
     }`,
     "variables": {
@@ -26,7 +33,7 @@ router.get('/armorType/:armor', (req, res) => {
     data: graphqlQuery
   })
   .then((data) => {
-    res.send(data.data.data.equipment.armor_category)
+    res.send(data.data.data.equipment)
   })
 });
 

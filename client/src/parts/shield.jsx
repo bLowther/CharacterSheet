@@ -43,14 +43,24 @@ const attribute = {
     fontSize: attSize
 }
 
-function Shield({ab, rb, asi, atr, bonus, prof, pBonus}) {
+function Shield({ab, rb, asi, atr, bonus, prof, pBonus, armorProf}) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const base = ab ? ab : 0;
   const race = rb ? rb : 0;
   const ASI = asi ? asi : 0;
   const score = base + race + ASI;
-  const save = ()=>{const roll = d20(); return prof ? `${roll+bonus+pBonus}(${roll}+${bonus}+${pBonus})` : `${roll+bonus}(${roll}+${bonus})`}
+  const save = ()=>{
+    const roll1 = d20();
+    const roll2 = d20();
+    const modifier = prof ? bonus + pBonus : bonus;
+    const normal = prof ? `${roll1+bonus+pBonus}(${roll1}+${bonus}+${pBonus})` : `${roll1+bonus}(${roll1}+${bonus})`;
+    const advantage = `${Math.max(roll1, roll2)  + modifier}(${roll1}/${roll2} + ${bonus}${prof ? ` + ${pBonus}` : ''})`;
+    const disadvantage = `${Math.min(roll1, roll2)  + modifier}(${roll1}/${roll2} + ${bonus}${prof ? ` + ${pBonus}` : ''})`;
+    return `${atr} Save: ${!armorProf && (atr === 'DEX' || atr === 'STR') ? 
+      `You're not Proficient with the armor you are wearing! ${disadvantage}`
+      : normal}`
+    }
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);

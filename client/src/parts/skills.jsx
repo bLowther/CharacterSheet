@@ -8,7 +8,7 @@ import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import { d20 } from './dice';
 
-function Skills({pBonus, bonuses, skills }) {
+function Skills({pBonus, bonuses, skills, armorProf, disStealth }) {
 
   const [open, setOpen] = useState(false);
   const [skill, setSkill] = useState('');
@@ -70,10 +70,24 @@ function Skills({pBonus, bonuses, skills }) {
     const prof = skills[skill];
     const statBonus = bonuses[bonus];
     const modifier = Math.floor(pBonus * prof) + statBonus;
+    const dis = `${skill} ${Math.min(roll1, roll2 )  + modifier}(${roll1}/${roll2} + ${statBonus}${prof > 0 ? ` + ${pBonus}` : ''})`;
+    const adv =  `${skill} ${Math.max(roll1, roll2 ) + modifier}(${roll1}/${roll2} + ${statBonus}${prof > 0 ? ` + ${pBonus}` : ''})`;
+    const normal = `${skill} ${roll1 + modifier}(${roll1}+${statBonus}${prof > 0 ? `+${pBonus}` : ''})`;
+    const disArmor = !armorProf && (bonus === 'DEX' || bonus === 'STR');
 
-    advantage ? console.log(`${skill} ${Math.max(roll1, roll2 ) + modifier}(${roll1}/${roll2} + ${statBonus}${prof > 0 ? ` + ${pBonus}` : ''})`) :
-    disadvantage ? console.log(`${skill} ${Math.min(roll1, roll2 )  + modifier}(${roll1}/${roll2} + ${statBonus}${prof > 0 ? ` + ${pBonus}` : ''})`) :
-    console.log(`${skill} ${roll1 + modifier}(${roll1}+${statBonus}${prof > 0 ? `+${pBonus}` : ''})`);
+    console.log(
+      disStealth && skill === 'Stealth' && !advantage ? 
+        `The armor you are wearing is hard to move in! ${dis})` :
+      disArmor && !advantage ?
+        `You're not Proficient with the armor you are wearing! ${dis})` :
+      advantage && (disStealth || disArmor) ?
+        `Good thing you had Advantage! ${normal})` :
+      advantage ?
+        adv :
+      disadvantage ?
+        dis :
+        normal
+    );
     handleClose();
   }
 
