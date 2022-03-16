@@ -74,14 +74,15 @@ function Skills({pBonus, bonuses, skills, armorProf, disStealth }) {
     const adv =  `${skill} ${Math.max(roll1, roll2 ) + modifier}(${roll1}/${roll2} + ${statBonus}${prof > 0 ? ` + ${pBonus}` : ''})`;
     const normal = `${skill} ${roll1 + modifier}(${roll1}+${statBonus}${prof > 0 ? `+${pBonus}` : ''})`;
     const disArmor = !armorProf && (bonus === 'DEX' || bonus === 'STR');
+    const loudArmor = disStealth && skill === 'Stealth';
 
     console.log(
-      disStealth && skill === 'Stealth' && !advantage ? 
-        `The armor you are wearing is hard to move in! ${dis})` :
+      loudArmor && !advantage ? 
+        `The armor you are wearing is hard to move in! ${dis}` :
       disArmor && !advantage ?
-        `You're not Proficient with the armor you are wearing! ${dis})` :
-      advantage && (disStealth || disArmor) ?
-        `Good thing you had Advantage! ${normal})` :
+        `You're not Proficient with the armor you are wearing! ${dis}` :
+      advantage && (loudArmor || disArmor) ?
+        `Good thing you had Advantage! ${normal}` :
       advantage ?
         adv :
       disadvantage ?
