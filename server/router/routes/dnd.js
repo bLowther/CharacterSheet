@@ -37,7 +37,7 @@ router.get('/armorType/:armor', (req, res) => {
   })
 });
 
-router.get('/movement/:race', (req, res) => {
+router.get('/race/:race', (req, res) => {
   const graphqlQuery = {
     "operationName": "Race",
     "query": `query Race($filter: FilterFindOneRaceInput) {

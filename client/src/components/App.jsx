@@ -20,17 +20,17 @@ function App() {
     abilities: {},
     asi: {},
     feats: [],
-    bonuses: {},
+    bonuses: {CHA: 0, CON: 0, DEX: 0, INT: 0, STR: 0, WIS: 0},
     skills: {},
     profs: {}
   });
-  const [equipment, setEquipment] = useState({equiped: {armor: null, hands:{}}, bag: []});
+  const [equipment, setEquipment] = useState({equiped: {armor: '', hands:{}}, bag: []});
   const [spells, setSpells] = useState({slots: [], prepared: [], known: []});
   const [armorProf, setArmorProf] = useState(false);
   const [disStealth, setdisStealth] = useState(false);
   const [ac, setAc] = useState({
     armor_category: '',
-    armor_class: {base:0, dex_bonus: true, max_bonus: null, },
+    armor_class: {base:0, dex_bonus: true, max_bonus: null},
     stealth_disadvantage: false,
     str_minimum: 0
   });
