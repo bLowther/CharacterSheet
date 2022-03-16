@@ -37,5 +37,30 @@ router.get('/armorType/:armor', (req, res) => {
   })
 });
 
+router.get('/movement/:race', (req, res) => {
+  const graphqlQuery = {
+    "operationName": "Race",
+    "query": `query Race($filter: FilterFindOneRaceInput) {
+      race(filter: $filter) {
+        speed
+      }
+    }`,
+    "variables": {
+      "filter": {
+        "name": req.params.race
+      }
+    }
+  };
+
+  axios({
+    url: endpoint,
+    method: 'post',
+    data: graphqlQuery
+  })
+  .then((data) => {
+    res.send(data.data.data.race)
+  })
+});
+
 
 module.exports = router;

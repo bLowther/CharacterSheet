@@ -1,12 +1,13 @@
 import React from 'react';
-import { d20 } from './dice';
 import Init from '../parts/initiative';
+import Move from '../parts/movement';
 
-function Glance({race, classes, dex, str, armorProf, ac}) {
+function Glance({race, classes, dexBonus, strScore, armorProf, ac}) {
 
   return (
     <div >
-      <Init dex={dex} classes={classes} armorProf={armorProf}/>
+      <Init dexBonus={dexBonus} classes={classes} armorProf={armorProf}/>
+      <Move race={race} strReq={ac.str_minimum} strScore={strScore}/>
     </div>
   );
 }

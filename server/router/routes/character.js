@@ -10,7 +10,7 @@ const mock = {
       name: 'test character',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT77o2AhtNObLLnWPYuAxAAf_Q8L7ZaJLVSyA&usqp=CAU',
       background: 'Acolyte',
-      race: 'Human',
+      race: 'Dwarf',
       currentHP: 3,
       maxHP: 7,
       tempHP: 1

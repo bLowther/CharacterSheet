@@ -30,8 +30,8 @@ function Stats({stats, info, setInfo, pBonus, armorProf, ac}) {
           <Glance
             race={info.race}
             classes={stats.classes}
-            dex={stats.bonuses.DEX}
-            str={stats.bonuses.STR}
+            dexBonus={stats.bonuses.DEX}
+            strScore={stats.abilities.STR}
             armorProf={armorProf}
             ac={ac}
           />
