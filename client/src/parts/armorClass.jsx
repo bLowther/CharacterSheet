@@ -1,4 +1,34 @@
 import React, {useState, useEffect} from 'react';
+import { Typography } from '@mui/material';
+
+const image = {
+  backgroundImage: `url("./AC.webp")`,
+  backgroundPosition: 'center',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  position: 'relative',
+  height: '6vw',
+  width: '6vw'
+}
+
+const scoreStyle = {
+  position: 'absolute',
+  top: '45%',
+  left: '23%',
+  width: '3vw',
+  height: '3vw',
+  textAlign: 'center',
+  fontSize: '2vw'
+}
+
+const titleStyle = {
+  position: 'absolute',
+  bottom: '7%',
+  width: '6vw',
+  height: '1vw',
+  textAlign: 'center',
+  fontSize: '1vw'
+}
 
 function Armor ({ac, bonuses, race, classes, wearingShield}) {
   const [equipmentBonus, setEquipmentBonus] = useState(0);
@@ -29,7 +59,12 @@ function Armor ({ac, bonuses, race, classes, wearingShield}) {
   }, [race, wearingShield])
 
   return (
-    <div>{Math.max(equipmentBonus, raceArmor, classArmor) + wearingShield}</div>
+    <div style={{position: "relative", height: '7vw', width: '8vw'}}>
+      <div style={image}>
+        <Typography sx={scoreStyle}>{Math.max(equipmentBonus, raceArmor, classArmor) + wearingShield}</Typography>
+      </div>
+      <Typography sx={titleStyle}>Armor Class</Typography>
+    </div>
   );
 }
 

@@ -9,20 +9,28 @@ const image = {
   backgroundRepeat: 'no-repeat',
   position: 'relative',
   textAlign: 'center',
+  top: '10%',
   height: '6vw',
   width: '8vw'
 }
 
-const colorHeight= '5vw';
+const titleStyle = {
+  position: 'absolute',
+  top: '0%',
+  width: '8vw',
+  height: '2vw',
+  textAlign: 'center',
+}
+
+const colorHeight= '4.8vw';
 const colorWidth = '3.2vw';
-const colorHoriz = '50%';
-const colorVert = '2%';
+const colorVert = '8%';
 const red = {
   backgroundColor: 'red',
   position: 'absolute',
   height: colorHeight,
   width: colorWidth,
-  left: colorHoriz,
+  right: '11%',
   bottom: colorVert
 }
 
@@ -31,7 +39,7 @@ const green = {
   position: 'absolute',
   height: colorHeight,
   width: colorWidth,
-  right: colorHoriz,
+  left: '10%',
   bottom: colorVert
 }
 
@@ -48,20 +56,22 @@ const scoreStyle = {
 const toggleSize= '1.8vw';
 const toggleDist = '18%';
 const togglePos = '70%';
+const toggleFont = '1vw'
 const advantageStyle = {
   position: 'absolute',
   top: togglePos,
   left: toggleDist,
   width: toggleSize,
-  height: toggleSize
+  height: toggleSize,
+  fontSize: toggleFont
 }
-
 const disadvantageStyle = {
   position: 'absolute',
   top: togglePos,
   right: toggleDist,
   width: toggleSize,
-  height: toggleSize
+  height: toggleSize,
+  fontSize: toggleFont
 }
 
 function Init({dexBonus, classes, armorProf}) { // class features and magic items can give advantage, conditions can give disadvantage
@@ -98,7 +108,7 @@ function Init({dexBonus, classes, armorProf}) { // class features and magic item
   }
 
   return (
-    <div style={{position: "relative", height: '6vw', width: '8vw'}}>
+    <div style={{position: "relative", height: '7vw', width: '8vw'}}> 
       <div style={advantage ? green : disadvantage ? red : {}}/>
       <div style={image}>
         <Typography sx={scoreStyle} onClick={handleRoll}>{dexBonus}</Typography>
@@ -111,6 +121,7 @@ function Init({dexBonus, classes, armorProf}) { // class features and magic item
           </ToggleButton>
         </div>
       </div>
+      <Typography sx={titleStyle}>Initiative</Typography>
     </div>
   );
 }

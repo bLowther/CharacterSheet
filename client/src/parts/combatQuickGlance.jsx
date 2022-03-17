@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Box, Grid } from '@mui/material';
 import axios from 'axios';
 import Init from '../parts/initiative';
 import Move from '../parts/movement';
@@ -18,11 +19,21 @@ function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield}
   }, [race])
 
   return (
-    <div >
-      <Init dexBonus={bonuses.DEX} classes={classes} armorProf={armorProf}/>
-      <Move race={race} baseMove={baseMove} strReq={ac.str_minimum} strScore={strScore} classes={classes}/>
-      <Armor ac={ac.armor_class} bonuses={bonuses} race={race} classes={classes} wearingShield={wearingShield}/>
-    </div>
+    <Box >
+      <Grid container direction="row">
+        <Grid item>
+          <Grid container direction="column">
+            <Grid item><Init dexBonus={bonuses.DEX} classes={classes} armorProf={armorProf}/></Grid>
+            <Grid item><Move race={race} baseMove={baseMove} strReq={ac.str_minimum} strScore={strScore} classes={classes}/></Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Grid container direction="column">
+            <Grid item><Armor ac={ac.armor_class} bonuses={bonuses} race={race} classes={classes} wearingShield={wearingShield}/></Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 
