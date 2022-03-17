@@ -4,7 +4,7 @@ import Profile from '../parts/profile';
 import Bar from '../parts/statBar';
 import Glance from '../parts/combatQuickGlance';
 
-function Stats({stats, info, setInfo, pBonus, armorProf, ac}) {
+function Stats({stats, info, setInfo, pBonus, armorProf, ac, wearingShield}) {
 
   return (
     <Box >
@@ -34,6 +34,7 @@ function Stats({stats, info, setInfo, pBonus, armorProf, ac}) {
             strScore={stats.abilities.STR}
             armorProf={armorProf}
             ac={ac}
+            wearingShield={wearingShield}
           />
         </Grid>
       </Grid> 

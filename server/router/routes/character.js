@@ -17,7 +17,7 @@ const mock = {
     },
     stats: {
       raceBonus: {STR: 1, DEX: 1, CON: 1, INT: 1, WIS: 1, CHA: 1},
-      classes: [{class: 'Warlock', level: 1, subclass: null}],
+      classes: [{class: 'Monk', level: 1, subclass: null}],
       abilities: {STR: 8, DEX: 10, CON: 12, INT: 13, WIS: 14, CHA: 15},
       asi: {},
       feats: [],
@@ -51,7 +51,7 @@ const mock = {
       }
     },
     equipment: {
-      equiped: {armor: 'Chain Mail', hands:{1:'', 2:''}},
+      equiped: {armor: '', hands:{1:'Shield', 2:''}},
       bag: [],
     },
     spells: {

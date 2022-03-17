@@ -4,7 +4,7 @@ import Init from '../parts/initiative';
 import Move from '../parts/movement';
 import Armor from '../parts/armorClass';
 
-function Glance({race, classes, bonuses, strScore, armorProf, ac}) {
+function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield}) {
   const [baseMove, setBaseMove] = useState(0);
 
   useEffect(() => {
@@ -20,8 +20,8 @@ function Glance({race, classes, bonuses, strScore, armorProf, ac}) {
   return (
     <div >
       <Init dexBonus={bonuses.DEX} classes={classes} armorProf={armorProf}/>
-      <Move race={race} baseMove={baseMove} strReq={ac.str_minimum} strScore={strScore}/>
-      <Armor ac={ac.armor_class} bonuses={bonuses} race={race} classes={classes}/>
+      <Move race={race} baseMove={baseMove} strReq={ac.str_minimum} strScore={strScore} classes={classes}/>
+      <Armor ac={ac.armor_class} bonuses={bonuses} race={race} classes={classes} wearingShield={wearingShield}/>
     </div>
   );
 }

@@ -24,8 +24,9 @@ function App() {
     skills: {},
     profs: {}
   });
-  const [equipment, setEquipment] = useState({equiped: {armor: '', hands:{}}, bag: []});
+  const [equipment, setEquipment] = useState({equiped: {armor: '', hands:{1:'', 2:''}}, bag: []});
   const [spells, setSpells] = useState({slots: [], prepared: [], known: []});
+  const [wearingShield, setWearingShield] = useState(0);
   const [armorProf, setArmorProf] = useState(false);
   const [disStealth, setdisStealth] = useState(false);
   const [ac, setAc] = useState({
@@ -48,13 +49,19 @@ function App() {
 
   useEffect(() => {
     const armor = equipment.equiped.armor;
-    if(armor){axios.get(`http://localhost:3000/api/d&d/armorType/${armor}`)
-    .then(res => {
-      setArmorProf(stats.profs.armor.includes(res.data.armor_category));
-      setdisStealth(res.data.stealth_disadvantage);
-      setAc(res.data)
-    })
-    .catch(err => console.log(err))}
+    const shield = equipment.equiped.hands[1] === "Shield" || equipment.equiped.hands[2] === "Shield"
+    if(armor){
+      axios.get(`http://localhost:3000/api/d&d/armorType/${armor}`)
+      .then(res => {
+        setArmorProf(stats.profs.armor.includes(res.data.armor_category));
+        setdisStealth(res.data.stealth_disadvantage);
+        setAc(res.data);        
+      })
+      .catch(err => console.log(err))
+    } if(shield){
+      setArmorProf(stats.profs.armor.includes("Shield"));
+      shield ? setWearingShield(2) : setWearingShield(0);
+    }
   }, [equipment])
 
   const level = stats.classes.reduce((previousValue, currentValue) => previousValue + currentValue.level, 0)
@@ -64,7 +71,7 @@ function App() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container direction="column" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item>
-          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armorProf={armorProf} ac={ac}/>
+          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armorProf={armorProf} ac={ac} wearingShield={wearingShield}/>
         </Grid>
         <Grid item>
           <Skills pBonus={pBonus} bonuses={stats.bonuses} skills={stats.skills} armorProf={armorProf} disStealth={disStealth}/>
