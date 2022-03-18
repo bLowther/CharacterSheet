@@ -20,6 +20,7 @@ const titleStyle = {
   width: '8vw',
   height: '2vw',
   textAlign: 'center',
+  fontSize: '1.2vw'
 }
 
 const colorHeight= '4.8vw';

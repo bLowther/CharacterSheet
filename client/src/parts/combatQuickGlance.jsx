@@ -19,18 +19,38 @@ function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield}
   }, [race])
 
   return (
-    <Box >
-      <Grid container direction="row">
+    <Box>
+      <Grid container direction="column">
         <Grid item>
-          <Grid container direction="column">
-            <Grid item><Init dexBonus={bonuses.DEX} classes={classes} armorProf={armorProf}/></Grid>
-            <Grid item><Move race={race} baseMove={baseMove} strReq={ac.str_minimum} strScore={strScore} classes={classes}/></Grid>
+          <Grid container direction="row">
+            <Grid item>
+              <Init
+                dexBonus={bonuses.DEX}
+                classes={classes}
+                armorProf={armorProf}
+              />
+            </Grid>
+           <Grid item>
+              <Armor
+                ac={ac.armor_class}
+                bonuses={bonuses}
+                race={race}
+                classes={classes}
+                wearingShield={wearingShield}
+              />
+            </Grid> 
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container direction="column">
-            <Grid item><Armor ac={ac.armor_class} bonuses={bonuses} race={race} classes={classes} wearingShield={wearingShield}/></Grid>
-          </Grid>
+          <Move
+            race={race}
+            baseMove={baseMove}
+            strReq={ac.str_minimum}
+            strScore={strScore}
+            classes={classes}
+            armorType={ac.armor_category}
+            wearingShield={wearingShield}
+          />
         </Grid>
       </Grid>
     </Box>

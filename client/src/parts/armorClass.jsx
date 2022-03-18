@@ -36,14 +36,18 @@ function Armor ({ac, bonuses, race, classes, wearingShield}) {
   const [raceArmor, setRaceArmor] = useState(0);
 
   useEffect(()=>{
-    setEquipmentBonus(ac.dex_bonus ? ac.base + Math.min(ac.max_bonus, bonuses.DEX) : ac.base);
+    const lightArmor = ac.base + bonuses.DEX;
+    const mediumArmor = ac.base + Math.min(ac.max_bonus, bonuses.DEX);
+    const heavyArmor = ac.base;
+    setEquipmentBonus(ac.dex_bonus ? ac.max_bonus ? mediumArmor : lightArmor : heavyArmor);
   },[ac, wearingShield])
 
   useEffect(()=>{
+    const unarmored = ac.base === 0
     const isMonk = classes.findIndex(ele => ele.class === 'Monk');
     const isBarbarian = classes.findIndex(ele => ele.class === 'Barbarian');
-    const monkBonus = isMonk >= 0 && wearingShield === 0 ? bonuses.WIS : 0;
-    const barbarianBonus = isBarbarian < 0 ? 0 : bonuses.CON;
+    const monkBonus = isMonk >= 0 && wearingShield === 0 && unarmored ? bonuses.WIS : 0;
+    const barbarianBonus = isBarbarian < 0 && unarmored ? 0 : bonuses.CON;
     setClassArmor(10 + bonuses.DEX + Math.max(monkBonus, barbarianBonus));
   }, [classes, wearingShield])
 
@@ -59,7 +63,7 @@ function Armor ({ac, bonuses, race, classes, wearingShield}) {
   }, [race, wearingShield])
 
   return (
-    <div style={{position: "relative", height: '7vw', width: '8vw'}}>
+    <div style={{position: "relative", height: '7vw', width: '7vw'}}>
       <div style={image}>
         <Typography sx={scoreStyle}>{Math.max(equipmentBonus, raceArmor, classArmor) + wearingShield}</Typography>
       </div>

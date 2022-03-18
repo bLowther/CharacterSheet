@@ -31,7 +31,7 @@ function App() {
   const [disStealth, setdisStealth] = useState(false);
   const [ac, setAc] = useState({
     armor_category: '',
-    armor_class: {base:0, dex_bonus: true, max_bonus: null},
+    armor_class: {base: 0, dex_bonus: true, max_bonus: null},
     stealth_disadvantage: false,
     str_minimum: 0
   });
@@ -54,14 +54,14 @@ function App() {
       axios.get(`http://localhost:3000/api/d&d/armorType/${armor}`)
       .then(res => {
         setArmorProf(stats.profs.armor.includes(res.data.armor_category));
-        setdisStealth(res.data.stealth_disadvantage);
-        setAc(res.data);        
+        setdisStealth(res.data.stealth_disadvantage); 
+        setAc(res.data);     
       })
       .catch(err => console.log(err))
     } if(shield){
       setArmorProf(stats.profs.armor.includes("Shield"));
-      shield ? setWearingShield(2) : setWearingShield(0);
     }
+    shield ? setWearingShield(2) : setWearingShield(0);
   }, [equipment])
 
   const level = stats.classes.reduce((previousValue, currentValue) => previousValue + currentValue.level, 0)

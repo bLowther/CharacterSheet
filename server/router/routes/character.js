@@ -51,7 +51,7 @@ const mock = {
       }
     },
     equipment: {
-      equiped: {armor: '', hands:{1:'Shield', 2:''}},
+      equiped: {armor: '', hands:{1:'', 2:''}},
       bag: [],
     },
     spells: {
