@@ -4,6 +4,7 @@ import axios from 'axios';
 import Init from '../parts/initiative';
 import Move from '../parts/movement';
 import Armor from '../parts/armorClass';
+import Defences from '../parts/defences'
 
 function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield}) {
   const [baseMove, setBaseMove] = useState(0);
@@ -19,18 +20,12 @@ function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield}
   }, [race])
 
   return (
-    <Box>
+    <Box >
       <Grid container direction="column">
         <Grid item>
           <Grid container direction="row">
+            <Grid item><Defences/></Grid>
             <Grid item>
-              <Init
-                dexBonus={bonuses.DEX}
-                classes={classes}
-                armorProf={armorProf}
-              />
-            </Grid>
-           <Grid item>
               <Armor
                 ac={ac.armor_class}
                 bonuses={bonuses}
@@ -42,15 +37,26 @@ function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield}
           </Grid>
         </Grid>
         <Grid item>
-          <Move
-            race={race}
-            baseMove={baseMove}
-            strReq={ac.str_minimum}
-            strScore={strScore}
-            classes={classes}
-            armorType={ac.armor_category}
-            wearingShield={wearingShield}
-          />
+          <Grid container direction="row">
+            <Grid item>
+              <Init
+                dexBonus={bonuses.DEX}
+                classes={classes}
+                armorProf={armorProf}
+              />
+            </Grid>
+            <Grid item>
+              <Move
+                race={race}
+                baseMove={baseMove}
+                strReq={ac.str_minimum}
+                strScore={strScore}
+                classes={classes}
+                armorType={ac.armor_category}
+                wearingShield={wearingShield}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Box>

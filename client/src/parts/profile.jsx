@@ -7,6 +7,7 @@ import Health from './health';
 const inputStyle = {
   fontSize: "1vw",
   padding: 0,
+  height: "2vw",
   width: "2vw",
   left: "7%"
 };

@@ -6,7 +6,8 @@ const image = {
   backgroundPosition: 'center',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
-  position: 'relative',
+  position: 'absolute',
+  bottom: "0%",
   height: '6vw',
   width: '6vw'
 }
@@ -21,15 +22,6 @@ const scoreStyle = {
   fontSize: '2vw'
 }
 
-const titleStyle = {
-  position: 'absolute',
-  bottom: '7%',
-  width: '6vw',
-  height: '1vw',
-  textAlign: 'center',
-  fontSize: '1vw'
-}
-
 function Armor ({ac, bonuses, race, classes, wearingShield}) {
   const [equipmentBonus, setEquipmentBonus] = useState(0);
   const [classArmor, setClassArmor] = useState(0);
@@ -40,7 +32,7 @@ function Armor ({ac, bonuses, race, classes, wearingShield}) {
     const mediumArmor = ac.base + Math.min(ac.max_bonus, bonuses.DEX);
     const heavyArmor = ac.base;
     setEquipmentBonus(ac.dex_bonus ? ac.max_bonus ? mediumArmor : lightArmor : heavyArmor);
-  },[ac, wearingShield])
+  },[ac])
 
   useEffect(()=>{
     const unarmored = ac.base === 0
@@ -60,14 +52,13 @@ function Armor ({ac, bonuses, race, classes, wearingShield}) {
     }
     const isRaceWithArmor = racesWithNaturalArmor[race];
     setRaceArmor(isRaceWithArmor ? isRaceWithArmor.base + (bonuses[isRaceWithArmor.stat] || 0) : 10 + bonuses.DEX);
-  }, [race, wearingShield])
+  }, [race])
 
   return (
-    <div style={{position: "relative", height: '7vw', width: '7vw'}}>
+    <div style={{position: "relative", height: '6vw', width: '6vw'}}>
       <div style={image}>
         <Typography sx={scoreStyle}>{Math.max(equipmentBonus, raceArmor, classArmor) + wearingShield}</Typography>
       </div>
-      <Typography sx={titleStyle}>Armor Class</Typography>
     </div>
   );
 }

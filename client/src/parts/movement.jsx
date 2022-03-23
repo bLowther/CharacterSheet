@@ -1,6 +1,14 @@
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 
+const moveStyle = {
+  width: '4vw',
+  padding:0,
+  borderRightStyle: 'groove',
+  borderLeftStyle: 'groove',
+  fontSize: '.8vw'
+}
+
 function Move ({race, baseMove, strReq, strScore, classes, armorType, wearingShield}) { 
   const armorHeavy = strScore < strReq && race !== 'Dwarf';
   const preClassSpeed= armorHeavy? baseMove - 10 : baseMove;
@@ -17,15 +25,17 @@ function Move ({race, baseMove, strReq, strScore, classes, armorType, wearingShi
   }
 
   return (
-    <Box>
-      <Grid container direction="column" sx={{textAlign: 'center' }}>
-        <Grid item><Typography>Movement</Typography></Grid>
-        <Grid container direction="row" spacing={2} sx={{fontSize: '1vw'}}> 
-          <Grid item><Typography>Walk: {speed}</Typography></Grid>
-          <Grid item><Typography>Fly: 0</Typography></Grid>
-          <Grid item><Typography>Swim: {difficultTerrain(speed)}</Typography></Grid>
-          <Grid item><Typography>Climb: {difficultTerrain(speed)}</Typography></Grid> 
-        </Grid>
+    <Box sx={{textAlign: 'center', position: "relative", height: '6vw', width: '18vw'}}>
+      <Grid container direction="column" >
+        <Grid item><Typography sx={{borderTopStyle: 'groove', fontSize: '1.5vw'}}>Movement</Typography></Grid>
+        <Grid item >
+          <Grid container direction="row" wrap='nowrap'sx={{borderTopStyle: 'groove', borderBottomStyle: 'groove', justifyContent: 'space-between'}}> 
+            <Grid item><Typography sx={moveStyle}>Walk: {speed}</Typography></Grid>
+            <Grid item><Typography sx={moveStyle}>Fly: 0</Typography></Grid>
+            <Grid item><Typography sx={moveStyle}>Swim: {difficultTerrain(speed)}</Typography></Grid>
+            <Grid item><Typography sx={moveStyle}>Climb: {difficultTerrain(speed)}</Typography></Grid> 
+          </Grid>
+        </Grid> 
       </Grid> 
     </Box>
   );

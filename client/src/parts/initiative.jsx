@@ -10,7 +10,7 @@ const image = {
   position: 'relative',
   textAlign: 'center',
   top: '10%',
-  height: '6vw',
+  height: '5vw',
   width: '8vw'
 }
 
@@ -20,18 +20,18 @@ const titleStyle = {
   width: '8vw',
   height: '2vw',
   textAlign: 'center',
-  fontSize: '1.2vw'
+  fontSize: '1vw'
 }
 
-const colorHeight= '4.8vw';
-const colorWidth = '3.2vw';
-const colorVert = '8%';
+const colorHeight= '3.8vw';
+const colorWidth = '2.5vw';
+const colorVert = '10%';
 const red = {
   backgroundColor: 'red',
   position: 'absolute',
   height: colorHeight,
   width: colorWidth,
-  right: '11%',
+  right: '17%',
   bottom: colorVert
 }
 
@@ -40,24 +40,24 @@ const green = {
   position: 'absolute',
   height: colorHeight,
   width: colorWidth,
-  left: '10%',
+  left: '15%',
   bottom: colorVert
 }
 
-const socreSize = '3vw';
+const socreSize = '2vw';
 const scoreStyle = {
   position: 'absolute',
-  top: '20%',
+  top: '25%',
   width: '8vw',
   height: socreSize,
   lineHeight: socreSize,
   fontSize: socreSize
 }
 
-const toggleSize= '1.8vw';
-const toggleDist = '18%';
+const toggleSize= '1.5vw';
+const toggleDist = '22%';
 const togglePos = '70%';
-const toggleFont = '1vw'
+const toggleFont = '.8vw'
 const advantageStyle = {
   position: 'absolute',
   top: togglePos,
@@ -109,7 +109,7 @@ function Init({dexBonus, classes, armorProf}) { // class features and magic item
   }
 
   return (
-    <div style={{position: "relative", height: '7vw', width: '8vw'}}> 
+    <div style={{position: "relative", height: '6vw', width: '8vw'}}> 
       <div style={advantage ? green : disadvantage ? red : {}}/>
       <div style={image}>
         <Typography sx={scoreStyle} onClick={handleRoll}>{dexBonus}</Typography>

@@ -8,7 +8,7 @@ function Stats({stats, info, setInfo, pBonus, armorProf, ac, wearingShield}) {
 
   return (
     <Box >
-      <Grid container direction="row" spacing={1}>
+      <Grid container direction="row" spacing={1} wrap='nowrap'>
         <Grid item>
           <Profile
             info={info}

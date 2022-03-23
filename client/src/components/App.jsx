@@ -69,7 +69,7 @@ function App() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container direction="column" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container direction="column" wrap='nowrap' spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item>
           <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armorProf={armorProf} ac={ac} wearingShield={wearingShield}/>
         </Grid>

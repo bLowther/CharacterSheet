@@ -7,7 +7,7 @@ const mock = {
     user: 'test',
     password: 'password',
     info: {
-      name: 'test character',
+      name: 'Bob t. character',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT77o2AhtNObLLnWPYuAxAAf_Q8L7ZaJLVSyA&usqp=CAU',
       background: 'Acolyte',
       race: 'Human',
@@ -17,7 +17,7 @@ const mock = {
     },
     stats: {
       raceBonus: {STR: 1, DEX: 1, CON: 1, INT: 1, WIS: 1, CHA: 1},
-      classes: [{class: 'Monk', level: 1, subclass: null}],
+      classes: [{class: 'Barbarian', level: 11, subclass: null}], ////
       abilities: {STR: 8, DEX: 10, CON: 12, INT: 13, WIS: 14, CHA: 15},
       asi: {},
       feats: [],
@@ -51,7 +51,7 @@ const mock = {
       }
     },
     equipment: {
-      equiped: {armor: '', hands:{1:'', 2:''}},
+      equiped: {armor: '', hands:{1:'Shield', 2:''}}, ////
       bag: [],
     },
     spells: {
