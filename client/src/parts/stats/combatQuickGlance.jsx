@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { Box, Grid } from '@mui/material';
-import Init from '../parts/initiative';
-import Move from '../parts/movement';
-import Armor from '../parts/armorClass';
-import Defences from '../parts/defences'
+import Init from './initiative';
+import Move from './movement';
+import Armor from './armorClass';
+import Defences from './defences'
 
 function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield, baseMove}) {
 

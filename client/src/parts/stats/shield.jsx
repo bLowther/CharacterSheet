@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Popover, Typography } from '@mui/material';
-import { d20 } from './dice';
+import { d20 } from '../dice';
 
 const image = {
   backgroundImage: `url("./statShield.webp")`,

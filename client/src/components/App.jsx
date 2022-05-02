@@ -66,7 +66,7 @@ function App() {
   }, [equipment])
 
   useEffect(() => {
-    if(info){
+    if(info.race){
       axios.get(`http://localhost:3000/api/d&d/race/${info.race}`)
       .then(res => {
         setBaseMove(res.data.speed)

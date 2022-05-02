@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import Profile from '../parts/profile';
-import Bar from '../parts/statBar';
-import Glance from '../parts/combatQuickGlance';
+import Profile from '../parts/stats/profile';
+import Bar from '../parts/stats/statBar';
+import Glance from '../parts/stats/combatQuickGlance';
 
 function Stats({stats, info, setInfo, pBonus, armorProf, ac, wearingShield, baseMove}) {
 
