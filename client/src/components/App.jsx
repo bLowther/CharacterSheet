@@ -24,6 +24,7 @@ function App() {
     skills: {},
     profs: {}
   });
+  const [baseMove, setBaseMove] = useState(0);
   const [equipment, setEquipment] = useState({equiped: {armor: '', hands:{1:'', 2:''}}, bag: []});
   const [spells, setSpells] = useState({slots: [], prepared: [], known: []});
   const [wearingShield, setWearingShield] = useState(0);
@@ -64,6 +65,16 @@ function App() {
     shield ? setWearingShield(2) : setWearingShield(0);
   }, [equipment])
 
+  useEffect(() => {
+    if(info){
+      axios.get(`http://localhost:3000/api/d&d/race/${info.race}`)
+      .then(res => {
+        setBaseMove(res.data.speed)
+      })
+      .catch(err => console.log(err))
+    }
+  }, [info])
+
   const level = stats.classes.reduce((previousValue, currentValue) => previousValue + currentValue.level, 0)
   const pBonus = level > 16 ? 6 : level > 12 ? 5 : level > 8 ? 4 : level > 4 ? 3 : 2;
 
@@ -71,7 +82,7 @@ function App() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container direction="column" wrap='nowrap' spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item>
-          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armorProf={armorProf} ac={ac} wearingShield={wearingShield}/>
+          <Stats stats={stats} info={info} setInfo={setInfo} pBonus={pBonus} armorProf={armorProf} ac={ac} wearingShield={wearingShield} baseMove={baseMove}/>
         </Grid>
         <Grid item>
           <Skills pBonus={pBonus} bonuses={stats.bonuses} skills={stats.skills} armorProf={armorProf} disStealth={disStealth}/>

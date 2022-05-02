@@ -1,23 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { Box, Grid } from '@mui/material';
-import axios from 'axios';
 import Init from '../parts/initiative';
 import Move from '../parts/movement';
 import Armor from '../parts/armorClass';
 import Defences from '../parts/defences'
 
-function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield}) {
-  const [baseMove, setBaseMove] = useState(0);
-
-  useEffect(() => {
-    if(race){
-      axios.get(`http://localhost:3000/api/d&d/race/${race}`)
-      .then(res => {
-        setBaseMove(res.data.speed)
-      })
-      .catch(err => console.log(err))
-    }
-  }, [race])
+function Glance({race, classes, bonuses, strScore, armorProf, ac, wearingShield, baseMove}) {
 
   return (
     <Box >
